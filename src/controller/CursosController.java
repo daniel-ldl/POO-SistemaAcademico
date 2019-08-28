@@ -8,24 +8,24 @@ import entidades.CursoEntidade;
 
 public class CursosController {
 
-	Conexao minhaConexao = new Conexao();
+	Conexao connection = new Conexao();
 
 	public void salvarCliente(CursoEntidade curso) {
 
-		minhaConexao.getConexao();
+		connection.getConexao();
 		String meuInsert = "INSERT INTO cursos(\r\n" + "	nomeCurso)\r\n"
 				+ "	VALUES (?);";
 		try {
-			PreparedStatement smtInsereCliente = minhaConexao.getConexao().prepareStatement(meuInsert);
+			PreparedStatement smtInsereCliente = connection.getConexao().prepareStatement(meuInsert);
 			smtInsereCliente.setString(1, curso.getNome());
 			
 			smtInsereCliente.executeUpdate();
-			JOptionPane.showMessageDialog(null, "Cliente Salvo com Sucesso", "Sucesso",
+			JOptionPane.showMessageDialog(null, "Curso salvo com sucesso!", "Sucesso",
 					JOptionPane.INFORMATION_MESSAGE);
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(null, ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
 		} finally {
-			minhaConexao.fecharConexao();
+			connection.fecharConexao();
 		}
 	}
 

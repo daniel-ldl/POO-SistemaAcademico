@@ -18,6 +18,11 @@ public class AlunoEntidade extends PessoaEntidade {
 
 	}
 
+	public AlunoEntidade(String matricula, Date dataMatriculaInstituicao) {
+		this.matricula = matricula;
+		this.dataMatriculaInstituicao = dataMatriculaInstituicao;
+	}
+
 	public String getMatricula() {
 		return matricula;
 	}
