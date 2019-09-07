@@ -1,5 +1,9 @@
 package view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -47,16 +51,13 @@ public class MenuView extends JFrame {
 		jmbPrincipal = new JMenuBar();
 		setJMenuBar(jmbPrincipal);
 		defineMenu();
+		defineAcaoDoMenu();
 		setVisible(true);
 
 	}
 
-	private void defineComponentesNaTela() {
-
-	}
-
 	private void defineMenu() {
-		
+
 		jmDisciplina = new JMenu("Disciplinas");
 		jmAluno = new JMenu("Alunos");
 		jmCurso = new JMenu("Curso");
@@ -68,38 +69,62 @@ public class MenuView extends JFrame {
 		jmbPrincipal.add(jmProfessor);
 		jmbPrincipal.add(jmCurso);
 		jmbPrincipal.add(jmGrade);
-		
-		//Define itens do menu disciplina
+
+		// Define itens do menu disciplina
 		jmiCadastraDisciplinas = new JMenuItem("Cadastrar");
 		jmiListaDisciplinas = new JMenuItem("Listar");
 		jmDisciplina.add(jmiCadastraDisciplinas);
 		jmDisciplina.add(jmiListaDisciplinas);
-		
-		//Define itens do menu aluno
+
+		// Define itens do menu aluno
 		jmiCadastrarAlunos = new JMenuItem("Cadastrar");
 		jmiListarAlunos = new JMenuItem("Listar");
 		jmAluno.add(jmiCadastrarAlunos);
 		jmAluno.add(jmiListarAlunos);
-		
-		//Defini itens do menu professor
+
+		// Defini itens do menu professor
 		jmiCadastraProfessor = new JMenuItem("Cadastrar");
 		jmiListarProfessor = new JMenuItem("Listar");
 		jmProfessor.add(jmiCadastraProfessor);
 		jmProfessor.add(jmiListarProfessor);
-		
-		//Defini itens do menu grade
+
+		// Defini itens do menu grade
 		jmiCadastraGrade = new JMenuItem("Cadastrar");
 		jmiListarGrade = new JMenuItem("Listar");
 		jmGrade.add(jmiCadastraGrade);
 		jmGrade.add(jmiListarGrade);
-		
-		//Defini itens do menu curso
+
+		// Defini itens do menu curso
 		jmiCadastraCurso = new JMenuItem("Cadastrar");
 		jmiListarCurso = new JMenuItem("Listar");
 		jmCurso.add(jmiCadastraCurso);
 		jmCurso.add(jmiListarCurso);
 	}
 
+	private void defineAcaoDoMenu(){
+		
+		jmiCadastraDisciplinas.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				DisciplinaView disciplina;
+				try {
+					disciplina = new DisciplinaView();
+					disciplina.setVisible(true);
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				dispose();
+			}
+		});
+		
+	}
+	
 	public static void main(String[] args) {
 		new MenuView();
 	}
