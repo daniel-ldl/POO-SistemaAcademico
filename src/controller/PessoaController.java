@@ -33,8 +33,6 @@ public class PessoaController {
 			stmInserePessoa.setString(9, pessoa.getComplemento());
 			stmInserePessoa.executeUpdate();
 
-			JOptionPane.showMessageDialog(null, "Disciplina salva!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
 		} finally {

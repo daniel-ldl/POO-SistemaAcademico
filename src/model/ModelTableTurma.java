@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import entidades.ProfessorEntidade;
 import entidades.TurmaEntidade;
 
 public class ModelTableTurma extends AbstractTableModel {

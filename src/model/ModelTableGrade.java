@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import entidades.CursoEntidade;
 import entidades.GradeEntidade;
 
 public class ModelTableGrade extends AbstractTableModel {

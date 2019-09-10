@@ -101,10 +101,10 @@ public class MenuView extends JFrame {
 		jmCurso.add(jmiListarCurso);
 	}
 
-	private void defineAcaoDoMenu(){
-		
+	private void defineAcaoDoMenu() {
+
 		jmiCadastraDisciplinas.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				DisciplinaView disciplina;
@@ -118,13 +118,35 @@ public class MenuView extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
+
 				dispose();
 			}
 		});
-		
+
+		jmiCadastrarAlunos.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				AlunoView aluno;
+
+				try {
+					aluno = new AlunoView();
+					aluno.setVisible(true);
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				dispose();
+			}
+
+		});
+
 	}
-	
+
 	public static void main(String[] args) {
 		new MenuView();
 	}

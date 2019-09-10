@@ -23,7 +23,7 @@ public class DisciplinaController {
 				+ "	VALUES (?, ?);";
 		try {
 			PreparedStatement smtInsereDisciplina = connection.getConexao().prepareStatement(sqlInsereDisciplina);
-			smtInsereDisciplina.setInt(1, disciplina.getCodigo());
+			smtInsereDisciplina.setString(1, disciplina.getCodigo());
 			smtInsereDisciplina.setString(2, disciplina.getNome());
 			smtInsereDisciplina.executeUpdate();
 
@@ -47,13 +47,15 @@ public class DisciplinaController {
 			if (rsCliente.next()) {
 				do {
 					DisciplinaEntidade novo = new DisciplinaEntidade();
-					novo.setCodigo(rsCliente.getInt("codigodisciplina"));
+					novo.setCodigo(rsCliente.getString("codigodisciplina"));
 					novo.setNome(rsCliente.getString("nomedisciplina"));
 					listaDeDisciplinas.add(novo);
 				} while (rsCliente.next());
 			}
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(null, ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+		}finally {
+			connection.fecharConexao();
 		}
 		for (DisciplinaEntidade c : listaDeDisciplinas) {
 			modeloTabela.addRows(c);

@@ -2,10 +2,10 @@ package entidades;
 
 public class DisciplinaEntidade {
 
-	private int codigo;
+	private String codigo;
 	private String nome;
 
-	public DisciplinaEntidade(int codigo, String nome) {
+	public DisciplinaEntidade(String codigo, String nome) {
 		super();
 		this.codigo = codigo;
 		this.nome = nome;
@@ -15,11 +15,11 @@ public class DisciplinaEntidade {
 
 	}
 
-	public int getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(int codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 

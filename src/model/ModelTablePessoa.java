@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import entidades.MunicipioEntidade;
 import entidades.PessoaEntidade;
 
 public class ModelTablePessoa extends AbstractTableModel {

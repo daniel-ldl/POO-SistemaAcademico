@@ -18,11 +18,14 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import connection.Conexao;
+import controller.AlunoController;
 import controller.DisciplinaController;
+import entidades.AlunoEntidade;
 import entidades.DisciplinaEntidade;
-import model.ModelTableDisciplinas;
+import entidades.PessoaEntidade;
+import model.ModelTableAluno;
 
-public class DisciplinaView extends JFrame {
+public class AlunoView extends JFrame {
 
 	/**
 	 * 
@@ -31,7 +34,16 @@ public class DisciplinaView extends JFrame {
 	private JPanel containerPrincipal;
 	private JPanel disciplinas;
 	private JTextField campoNome;
-	private JTextField campoCodigo;
+	private JTextField matricula;
+	private JTextField cpf;
+	private JTextField sexo;
+	private JTextField dataNascimento;
+	private JTextField logradouro;
+	private JTextField bairro;
+	private JTextField cep;
+	private JTextField numero;
+	private JTextField complemento;
+	private JTextField email;
 	private JLabel lblNome;
 	private JLabel lblCodigo;
 	private JButton botaoSalvar;
@@ -39,7 +51,8 @@ public class DisciplinaView extends JFrame {
 	private JButton botaoCancelar;
 	private JTable tblPessoas;
 	private JScrollPane scrlPessoas;
-	private List<DisciplinaEntidade> listaDeDisciplinas;
+	private List<AlunoEntidade> listaDeAlunos;
+	private List<PessoaEntidade> listaDePessoas;
 
 	// @autor - Daniel Lima Leite
 
@@ -48,14 +61,14 @@ public class DisciplinaView extends JFrame {
 	private final int COORDENADA_MAIS_A_ESQUERDA = 30;
 	private final int COORDENADA_MAIS_A_DIREITA = 365;
 
-	DisciplinaEntidade cliente = new DisciplinaEntidade();
+	AlunoEntidade cliente = new AlunoEntidade();
 	Conexao con = new Conexao();
-	DisciplinaController control = new DisciplinaController();
+	AlunoController control = new AlunoController();
 
-	public DisciplinaView() throws ClassNotFoundException, IOException {
+	public AlunoView() throws ClassNotFoundException, IOException {
 
-		listaDeDisciplinas = new ArrayList<DisciplinaEntidade>();
-		control.carregarDisciplinas(new ModelTableDisciplinas(listaDeDisciplinas));
+		listaDeAlunos = new ArrayList<AlunoEntidade>();
+		control.carregarAlunos(new ModelTableAluno(listaDeAlunos));
 		inicializaTela();
 	}
 
@@ -63,20 +76,20 @@ public class DisciplinaView extends JFrame {
 		containerPrincipal = new JPanel();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("CRUD");
-		setBounds(0, 0, 700, 450);
+		setBounds(0, 0, 1200, 450);
 		containerPrincipal = new JPanel();
 		containerPrincipal.setLayout(null);
 
 		disciplinas = new JPanel();
-		disciplinas.setBounds(30, 180, 640, 210);
-		disciplinas.setBorder(BorderFactory.createTitledBorder("Clientes"));
+		disciplinas.setBounds(30, 100, 1100, 210);
+		disciplinas.setBorder(BorderFactory.createTitledBorder("Alunos"));
 		disciplinas.setLayout(null);
 		containerPrincipal.add(disciplinas);
 
-		ModelTableDisciplinas modeloTabela = new ModelTableDisciplinas(listaDeDisciplinas);
+		ModelTableAluno modeloTabela = new ModelTableAluno(listaDeAlunos);
 		tblPessoas = new JTable(modeloTabela);
 		scrlPessoas = new JScrollPane(tblPessoas);
-		scrlPessoas.setBounds(10, 15, 620, 190);
+		scrlPessoas.setBounds(10, 15, 1085, 190);
 		disciplinas.add(scrlPessoas);
 
 		defineComponentesNaTela();
@@ -85,25 +98,27 @@ public class DisciplinaView extends JFrame {
 		setVisible(true);
 	}
 
-	private void defineEventoDoBotao(ModelTableDisciplinas modeloTabela) {
+	private void defineEventoDoBotao(ModelTableAluno modeloTabela) {
 
 		botaoSalvar.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				List<DisciplinaEntidade> listaDeDisciplinas = new ArrayList<DisciplinaEntidade>();
+				List<AlunoEntidade> listaDeAlunos = new ArrayList<AlunoEntidade>();
 				DisciplinaEntidade disciplina = new DisciplinaEntidade();
 				DisciplinaController dc = new DisciplinaController();
+				AlunoEntidade aluno = new AlunoEntidade();
+				AlunoController ac = new AlunoController();
 
-				String codigo = campoCodigo.getText();
+				String codigo = matricula.getText();
 				String nome = campoNome.getText();
 
 				disciplina.setCodigo(codigo);
 				disciplina.setNome(nome);
 
-				modeloTabela.addRows(disciplina);
-				listaDeDisciplinas.add(disciplina);
+				modeloTabela.addRows(aluno);
+				listaDeAlunos.add(aluno);
 				
 				dc.salvarDisciplina(disciplina);
 
@@ -118,7 +133,7 @@ public class DisciplinaView extends JFrame {
 				JTable table = (JTable) mouseEvent.getSource();
 				if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
 
-					campoCodigo.setText((String) tblPessoas.getValueAt(tblPessoas.getSelectedRow(), 0));
+					matricula.setText((String) tblPessoas.getValueAt(tblPessoas.getSelectedRow(), 0));
 					campoNome.setText((String) tblPessoas.getValueAt(tblPessoas.getSelectedRow(), 1));
 
 				}
@@ -132,7 +147,7 @@ public class DisciplinaView extends JFrame {
 	private void limparCampos() {
 
 		campoNome.setText("");
-		campoCodigo.setText("");
+		matricula.setText("");
 		campoNome.requestFocus();
 
 	}
@@ -140,23 +155,23 @@ public class DisciplinaView extends JFrame {
 	private void defineComponentesNaTela() {
 
 		lblNome = new JLabel("Nome");
-		lblNome.setBounds(30, 8, 50, 30);
+		lblNome.setBounds(160, 8, 50, 30);
 		containerPrincipal.add(lblNome);
 
 		campoNome = new JTextField();
-		campoNome.setBounds(COORDENADA_MAIS_A_ESQUERDA, 30, LARGURA_COMPONENTE_TEXTO, ALTURA_COMPONENTE);
+		campoNome.setBounds(160, 30, LARGURA_COMPONENTE_TEXTO, ALTURA_COMPONENTE);
 		containerPrincipal.add(campoNome);
 
-		lblCodigo = new JLabel("Codigo");
-		lblCodigo.setBounds(COORDENADA_MAIS_A_DIREITA, 8, 150, 30);
+		lblCodigo = new JLabel("Matricula");
+		lblCodigo.setBounds(30, 8, 150, 30);
 		containerPrincipal.add(lblCodigo);
 
-		campoCodigo = new JTextField();
-		campoCodigo.setBounds(COORDENADA_MAIS_A_DIREITA, 30, 120, ALTURA_COMPONENTE);
-		containerPrincipal.add(campoCodigo);
+		matricula = new JTextField();
+		matricula.setBounds(COORDENADA_MAIS_A_ESQUERDA, 30, 120, ALTURA_COMPONENTE);
+		containerPrincipal.add(matricula);
 
 		botaoSalvar = new JButton("salvar");
-		botaoSalvar.setBounds(30, 60, 100, ALTURA_COMPONENTE);
+		botaoSalvar.setBounds(30, 63, 100, ALTURA_COMPONENTE);
 		containerPrincipal.add(botaoSalvar);
 
 		botaoExcluir = new JButton("excluir");
