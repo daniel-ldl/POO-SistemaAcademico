@@ -62,14 +62,14 @@ public class DisciplinaView extends JFrame {
 	private void inicializaTela() throws IOException {
 		containerPrincipal = new JPanel();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle("CRUD");
+		setTitle("Cadastro de Disciplinas");
 		setBounds(0, 0, 700, 450);
 		containerPrincipal = new JPanel();
 		containerPrincipal.setLayout(null);
 
 		disciplinas = new JPanel();
 		disciplinas.setBounds(30, 180, 640, 210);
-		disciplinas.setBorder(BorderFactory.createTitledBorder("Clientes"));
+		disciplinas.setBorder(BorderFactory.createTitledBorder("Disciplinas"));
 		disciplinas.setLayout(null);
 		containerPrincipal.add(disciplinas);
 

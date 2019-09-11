@@ -32,9 +32,11 @@ public class AlunoView extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel containerPrincipal;
-	private JPanel disciplinas;
+	private JPanel alunos;
+	private JPanel dadosAlunos;
 	private JTextField campoNome;
 	private JTextField matricula;
+	private JTextField dataMatricula;
 	private JTextField cpf;
 	private JTextField sexo;
 	private JTextField dataNascimento;
@@ -46,6 +48,7 @@ public class AlunoView extends JFrame {
 	private JTextField email;
 	private JLabel lblNome;
 	private JLabel lblCodigo;
+	private JLabel lblMatricula;
 	private JButton botaoSalvar;
 	private JButton botaoExcluir;
 	private JButton botaoCancelar;
@@ -75,22 +78,28 @@ public class AlunoView extends JFrame {
 	private void inicializaTela() throws IOException {
 		containerPrincipal = new JPanel();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle("CRUD");
-		setBounds(0, 0, 1200, 450);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		setTitle("SISTEMA ACADEMICO");
+		//setBounds(0, 0, 1200, 900);
 		containerPrincipal = new JPanel();
 		containerPrincipal.setLayout(null);
 
-		disciplinas = new JPanel();
-		disciplinas.setBounds(30, 100, 1100, 210);
-		disciplinas.setBorder(BorderFactory.createTitledBorder("Alunos"));
-		disciplinas.setLayout(null);
-		containerPrincipal.add(disciplinas);
-
+		alunos = new JPanel();
+		alunos.setBounds(30, 450, 1300, 210);
+		alunos.setBorder(BorderFactory.createTitledBorder("Alunos"));
+		alunos.setLayout(null);
+		containerPrincipal.add(alunos);
+		
+		dadosAlunos = new JPanel();
+		dadosAlunos.setBounds(30, 63, 1300, 300);
+		dadosAlunos.setBorder(BorderFactory.createTitledBorder("Dados do Aluno"));
+		containerPrincipal.add(dadosAlunos);
+		
 		ModelTableAluno modeloTabela = new ModelTableAluno(listaDeAlunos);
 		tblPessoas = new JTable(modeloTabela);
 		scrlPessoas = new JScrollPane(tblPessoas);
-		scrlPessoas.setBounds(10, 15, 1085, 190);
-		disciplinas.add(scrlPessoas);
+		scrlPessoas.setBounds(10, 15, 1285, 190);
+		alunos.add(scrlPessoas);
 
 		defineComponentesNaTela();
 		defineEventoDoBotao(modeloTabela);
@@ -169,7 +178,15 @@ public class AlunoView extends JFrame {
 		matricula = new JTextField();
 		matricula.setBounds(COORDENADA_MAIS_A_ESQUERDA, 30, 120, ALTURA_COMPONENTE);
 		containerPrincipal.add(matricula);
-
+		
+		dataMatricula = new JTextField();
+		dataMatricula.setBounds(470, 30, LARGURA_COMPONENTE_TEXTO, ALTURA_COMPONENTE);
+		containerPrincipal.add(dataMatricula);
+		
+		lblMatricula = new JLabel("Data de Matrícula");
+		lblMatricula.setBounds(470, 8, 150, 30);
+		containerPrincipal.add(lblMatricula);
+/*
 		botaoSalvar = new JButton("salvar");
 		botaoSalvar.setBounds(30, 63, 100, ALTURA_COMPONENTE);
 		containerPrincipal.add(botaoSalvar);
@@ -181,7 +198,7 @@ public class AlunoView extends JFrame {
 		botaoCancelar = new JButton("cancelar");
 		botaoCancelar.setBounds(260, 60, 100, ALTURA_COMPONENTE);
 		containerPrincipal.add(botaoCancelar);
-
+*/
 
 	}
 
