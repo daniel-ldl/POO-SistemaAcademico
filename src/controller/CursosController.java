@@ -1,8 +1,12 @@
 package controller;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+
 import connection.Conexao;
 import entidades.CursoEntidade;
 
@@ -26,6 +30,22 @@ public class CursosController {
 			JOptionPane.showMessageDialog(null, ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
 		} finally {
 			connection.fecharConexao();
+		}
+	}
+	
+	public void carregarCursos(JComboBox cursos) throws SQLException {
+		connection.getConexao();
+		ResultSet rs = null;
+		String meuSelect = "SELECT nomecurso\r\n" + 
+				"	FROM public.cursos;";
+		
+		PreparedStatement smtBuscaCursos = connection.getConexao().prepareStatement(meuSelect);
+		rs = smtBuscaCursos.executeQuery();
+		
+		if(rs.next()) {
+			do {
+				cursos.addItem(rs.getString("nomecurso"));					
+			}while(rs.next());
 		}
 	}
 

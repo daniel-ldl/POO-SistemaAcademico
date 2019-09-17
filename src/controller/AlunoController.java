@@ -20,20 +20,21 @@ public class AlunoController {
 	public void salvarAluno(AlunoEntidade aluno) {
 
 		connection.getConexao();
-		String sqlInsereAluno = "INSERT INTO public.alunos(\r\n" + "	matricula, datamatriculainstituicao)\r\n"
-				+ "	VALUES (?, ?);";
+		String sqlInsereAluno = "INSERT INTO public.alunos(\r\n" + 
+				"	matricula, datamatriculainst)\r\n" + 
+				"	VALUES (?, ?);";
 
 		try {
 
 			PreparedStatement stmInsereAluno = connection.getConexao().prepareStatement(sqlInsereAluno);
 			stmInsereAluno.setString(1, aluno.getMatricula());
-			stmInsereAluno.setDate(2, (Date) aluno.getDataMatriculaInstituicao());
+			stmInsereAluno.setDate(2, new java.sql.Date(aluno.getDataMatriculaInstituicao().getTimeInMillis()));
 			stmInsereAluno.executeUpdate();
 
 			JOptionPane.showMessageDialog(null, "Aluno salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Aluno: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
 		} finally {
 			connection.fecharConexao();
 		}
@@ -44,8 +45,8 @@ public class AlunoController {
 		connection.getConexao();
 		ResultSet rs = null;
 		List<AlunoEntidade> listaDeAlunos = new ArrayList<AlunoEntidade>();
-		String sqlBuscaAluno = "select pessoas.nomepessoa, pessoas.data_nascimento, pessoas.logradouro, pessoas.bairro, pessoas.cep, pessoas.numero,\r\n"
-				+ "pessoas.complemento, pessoas.email, alunos.matricula, alunos.datamatriculainstituicao \r\n"
+		String sqlBuscaAluno = "select pessoas.nomepessoa, pessoas.datanasc, pessoas.logradouro, pessoas.bairro, pessoas.cep, pessoas.numero,\r\n"
+				+ "pessoas.complemento, pessoas.email, alunos.matricula, alunos.dataMatriculaInst \r\n"
 				+ "from public.alunos\r\n" + "inner join public.pessoas on alunos.idpessoa = pessoas.idpessoa";
 		try {
 			PreparedStatement smtResgataAluno = connection.getConexao().prepareStatement(sqlBuscaAluno);
@@ -54,7 +55,7 @@ public class AlunoController {
 				do {
 					AlunoEntidade aluno = new AlunoEntidade();
 					aluno.setNome(rs.getString("pessoas.nomePessoa"));
-					aluno.setDataNascimento(rs.getDate("pessoas.data_nascimento"));
+					//aluno.setDataNascimento(rs.getDate("pessoas.datanasc"));
 					aluno.setLogradouro(rs.getString("pessoas.logradouro"));
 					aluno.setBairro(rs.getString("pessoas.bairro"));
 					aluno.setCep(rs.getString("pessoas.cep"));
@@ -62,7 +63,7 @@ public class AlunoController {
 					aluno.setComplemento(rs.getString("pessoas.complemento"));
 					aluno.setEmail(rs.getString("pessoas.email"));
 					aluno.setMatricula(rs.getString("aluno.matricula"));
-					aluno.setDataMatriculaInstituicao(rs.getDate("alunos.datamatriculainstituicao"));
+					//aluno.setDataMatriculaInstituicao(rs.getDate("alunos.datamatriculainst"));
 					listaDeAlunos.add(aluno);
 					
 				} while (rs.next());

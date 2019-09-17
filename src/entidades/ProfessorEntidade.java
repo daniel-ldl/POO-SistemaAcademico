@@ -1,16 +1,17 @@
 package entidades;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class ProfessorEntidade extends PessoaEntidade {
 
 	private String matricula;
 	private String formacao;
-	private Date dataMatriculaInstituicao;
+	private Calendar dataMatriculaInstituicao;
 
-	public ProfessorEntidade(String cpf, String nome, char sexo, Date dataNascimento, String logradouro, String bairro,
+	public ProfessorEntidade(String cpf, String nome, String sexo, Calendar dataNascimento, String logradouro, String bairro,
 			String cep, int numero, String complemento, String email, String matricula, String formacao,
-			Date dataMatriculaInstituicao) {
+			Calendar dataMatriculaInstituicao) {
 		super(cpf, nome, sexo, dataNascimento, logradouro, bairro, cep, numero, complemento, email);
 		this.matricula = matricula;
 		this.formacao = formacao;
@@ -37,11 +38,11 @@ public class ProfessorEntidade extends PessoaEntidade {
 		this.formacao = formacao;
 	}
 
-	public Date getDataMatriculaInstituicao() {
+	public Calendar getDataMatriculaInstituicao() {
 		return dataMatriculaInstituicao;
 	}
 
-	public void setDataMatriculaInstituicao(Date dataMatriculaInstituicao) {
+	public void setDataMatriculaInstituicao(Calendar dataMatriculaInstituicao) {
 		this.dataMatriculaInstituicao = dataMatriculaInstituicao;
 	}
 

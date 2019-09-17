@@ -1,13 +1,14 @@
 package entidades;
 
-import java.util.Date;
+import java.sql.Date;
+import java.util.Calendar;
 
 public class PessoaEntidade {
 
 	private String cpf;
 	private String nome;
-	private char sexo;
-	private Date dataNascimento;
+	private String sexo;
+	private Calendar dataNascimento;
 	private String logradouro;
 	private String bairro;
 	private String cep;
@@ -15,8 +16,8 @@ public class PessoaEntidade {
 	private String complemento;
 	private String email;
 
-	public PessoaEntidade(String cpf, String nome, char sexo, Date dataNascimento, String logradouro, String bairro,
-			String cep, int numero, String complemento, String email) {
+	public PessoaEntidade(String cpf, String nome, String sexo, Calendar dataNascimento, String logradouro,
+			String bairro, String cep, int numero, String complemento, String email) {
 		super();
 		this.cpf = cpf;
 		this.nome = nome;
@@ -50,20 +51,12 @@ public class PessoaEntidade {
 		this.nome = nome;
 	}
 
-	public char getSexo() {
+	public String getSexo() {
 		return sexo;
 	}
 
-	public void setSexo(char sexo) {
+	public void setSexo(String sexo) {
 		this.sexo = sexo;
-	}
-
-	public Date getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
 	}
 
 	public String getLogradouro() {
@@ -112,6 +105,22 @@ public class PessoaEntidade {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Calendar getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(Calendar dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+	
+	public long getData_Nascimento() {
+		return dataNascimento.getTimeInMillis();
+	}
+	
+	public void setData_Nascimento(long data) {
+		dataNascimento.setTimeInMillis(data);
 	}
 
 }

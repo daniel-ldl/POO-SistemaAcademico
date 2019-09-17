@@ -27,7 +27,7 @@ public class ProfessorController {
 
 			PreparedStatement stmInsereProfessor = connection.getConexao().prepareStatement(sqlInsereProfessor);
 			stmInsereProfessor.setString(1, professor.getMatricula());
-			stmInsereProfessor.setDate(2, (Date) professor.getDataMatriculaInstituicao());
+			stmInsereProfessor.setDate(2, (Date) professor.getDataMatriculaInstituicao().getTime());
 			stmInsereProfessor.setString(3, professor.getFormacao());
 			stmInsereProfessor.executeUpdate();
 
@@ -58,14 +58,14 @@ public class ProfessorController {
 				do {
 					ProfessorEntidade professor = new ProfessorEntidade();
 					professor.setNome(rsProfessor.getString("pessoas.nomepessoa"));
-					professor.setDataNascimento(rsProfessor.getDate("pessoas.data_nascimento"));
+					//professor.setDataNascimento(rsProfessor.getDate("pessoas.data_nascimento"));
 					professor.setLogradouro(rsProfessor.getString("pessoas.logradouro"));
 					professor.setBairro(rsProfessor.getString("pessoas.bairro"));
 					professor.setCep(rsProfessor.getString("pessoas.cep"));
 					professor.setComplemento(rsProfessor.getString("pessoas.complemento"));
 					professor.setEmail(rsProfessor.getString("pessoas.email"));
 					professor.setMatricula(rsProfessor.getString("professores.matricula"));
-					professor.setDataMatriculaInstituicao(rsProfessor.getDate("professores.datamatriculainstituicao"));
+					//professor.setDataMatriculaInstituicao(rsProfessor.getDate("professores.datamatriculainstituicao"));
 					professor.setFormacao(rsProfessor.getString("professores.formacao"));
 					listaDeProfessores.add(professor);
 				}while(rsProfessor.next());
